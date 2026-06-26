@@ -1,7 +1,9 @@
-import { cn } from '@/lib/utils';
-import { HTMLAttributes } from 'react';
+'use client';
 
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
+import { cn } from '@/lib/utils';
+import { motion, HTMLMotionProps } from 'framer-motion';
+
+interface CardProps extends HTMLMotionProps<"div"> {
   variant?: 'default' | 'glow' | 'elevated';
   padding?: 'sm' | 'md' | 'lg';
 }
@@ -14,14 +16,14 @@ export default function Card({
   ...props
 }: CardProps) {
   return (
-    <div
+    <motion.div
       className={cn(
-        'rounded-2xl border transition-all duration-300',
+        'rounded-2xl border transition-colors duration-300 transform-style-3d',
         {
-          'bg-white/5 border-white/10 backdrop-blur-xl': variant === 'default',
-          'bg-white/5 border-indigo-500/30 backdrop-blur-xl shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/20 hover:border-indigo-500/50':
+          'glass border-white/5': variant === 'default',
+          'glass-strong border-electric-500/30 shadow-glow-primary hover:shadow-glow-secondary hover:border-violet-500/50':
             variant === 'glow',
-          'bg-slate-800/80 border-white/10 backdrop-blur-xl shadow-xl hover:shadow-2xl hover:-translate-y-1':
+          'bg-obsidian-800/80 border-white/5 backdrop-blur-xl shadow-3d-elevated':
             variant === 'elevated',
         },
         {
@@ -31,9 +33,11 @@ export default function Card({
         },
         className
       )}
+      whileHover={{ y: -5, scale: 1.01 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       {...props}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

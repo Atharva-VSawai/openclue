@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   {
@@ -51,12 +52,17 @@ export default function FAQSection() {
   return (
     <section id="faq" className="relative py-24 lg:py-32">
       {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-900/10 to-transparent" />
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="text-indigo-400 text-sm font-semibold uppercase tracking-wider">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <span className="text-electric-400 text-sm font-semibold uppercase tracking-wider">
             Clear Answers
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-white mt-3 mb-5">
@@ -65,18 +71,22 @@ export default function FAQSection() {
           <p className="text-lg text-slate-400">
             Everything you need to know about the AI assistant, the free GitHub version, and the secure checkout process.
           </p>
-        </div>
+        </motion.div>
 
         {/* FAQ Items */}
         <div className="space-y-3">
           {faqs.map((faq, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
               className={cn(
                 'rounded-2xl border transition-all duration-300 overflow-hidden',
                 openIndex === index
-                  ? 'bg-white/5 border-indigo-500/30 shadow-lg shadow-indigo-500/5'
-                  : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+                  ? 'glass-strong border-electric-500/30 shadow-glow-primary'
+                  : 'glass border-white/5 hover:border-white/20'
               )}
             >
               <button
@@ -85,29 +95,35 @@ export default function FAQSection() {
                 aria-expanded={openIndex === index}
               >
                 <span className="text-white font-medium pr-4">{faq.question}</span>
-                <svg
+                <motion.svg
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
                   className={cn(
-                    'w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-300',
-                    openIndex === index && 'rotate-180 text-indigo-400'
+                    'w-5 h-5 flex-shrink-0',
+                    openIndex === index ? 'text-electric-400' : 'text-slate-400'
                   )}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                </motion.svg>
               </button>
-              <div
-                className={cn(
-                  'transition-all duration-300',
-                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  >
+                    <div className="px-6 pb-5 pt-2">
+                      <p className="text-slate-400 leading-relaxed">{faq.answer}</p>
+                    </div>
+                  </motion.div>
                 )}
-              >
-                <div className="px-6 pb-5">
-                  <p className="text-slate-400 leading-relaxed">{faq.answer}</p>
-                </div>
-              </div>
-            </div>
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
       </div>

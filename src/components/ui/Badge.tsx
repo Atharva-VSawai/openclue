@@ -13,9 +13,9 @@ export default function Badge({ children, variant = 'default', className }: Badg
         'inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider',
         {
           'bg-white/10 text-slate-300': variant === 'default',
-          'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30': variant === 'primary',
-          'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30': variant === 'success',
-          'bg-amber-500/20 text-amber-300 border border-amber-500/30': variant === 'warning',
+          'bg-electric-500/20 text-electric-300 border border-electric-500/30': variant === 'primary',
+          'bg-blue-500/20 text-blue-300 border border-blue-500/30': variant === 'success',
+          'bg-violet-500/20 text-violet-300 border border-violet-500/30': variant === 'warning',
         },
         className
       )}

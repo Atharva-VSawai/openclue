@@ -17,8 +17,8 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #0A0F1C;
-    color: #e2e8f0;
+    background-color: #030303;
+    color: #f1f5f9;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -28,7 +28,7 @@
   }
 
   ::selection {
-    background-color: rgba(99, 102, 241, 0.3);
+    background-color: rgba(59, 130, 246, 0.4);
     color: white;
   }
 
@@ -38,43 +38,45 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #0A0F1C;
+    background: #030303;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #334155;
+    background: #1C1C1C;
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: #2C2C2C;
   }
 }
 
 @layer components {
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .glass-strong {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 10px 40px -10px rgba(0, 0, 0, 0.5);
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #818cf8 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #a78bfa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-accent {
-    background: linear-gradient(135deg, #6366f1 0%, #a78bfa 50%, #c084fc 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #d946ef 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -82,34 +84,32 @@
 
   .hero-grid {
     background-image: 
-      linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    perspective: 1000px;
   }
 
   .hero-radial {
-    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent);
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.05), transparent);
   }
 
   .section-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
-  }
-
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-
-  .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
   }
 }

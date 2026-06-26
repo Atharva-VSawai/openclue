@@ -2,45 +2,78 @@
 
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
+import { motion } from 'framer-motion';
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-navy-900" />
+      <div className="absolute inset-0 bg-obsidian-950" />
       <div className="absolute inset-0 hero-grid" />
       <div className="absolute inset-0 hero-radial" />
 
       {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-indigo-600/20 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-[120px] animate-float" style={{ animationDelay: '3s' }} />
-      <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-emerald-600/10 rounded-full blur-[80px] animate-float" style={{ animationDelay: '1.5s' }} />
+      <motion.div 
+        animate={{ y: [0, -20, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 left-1/4 w-72 h-72 bg-electric-600/20 rounded-full blur-[100px]" 
+      />
+      <motion.div 
+        animate={{ y: [0, 20, 0], scale: [1, 1.2, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-600/15 rounded-full blur-[120px]" 
+      />
+      <motion.div 
+        animate={{ x: [0, -20, 0], y: [0, 10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute top-1/2 right-1/3 w-48 h-48 bg-blue-600/10 rounded-full blur-[80px]" 
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <div className="text-center max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm font-medium mb-8 animate-fade-in-down">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-electric-500/20 text-electric-300 text-sm font-medium mb-8 shadow-glow-primary"
+          >
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
             Now available for Windows
-          </div>
+          </motion.div>
 
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-heading leading-tight mb-6 animate-fade-in-up">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-heading leading-tight mb-6"
+          >
             <span className="gradient-text">Your Smart Desktop</span>
             <br />
             <span className="text-white">AI Assistant.</span>
-          </h1>
+          </motion.h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.2s' }}>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+          >
             The ultimate AI desktop assistant for students, developers, and professionals. Get real-time help during meetings, coding, and study sessions.
             Instant access to the premium app is just <span className="text-white font-semibold">₹59</span>, or explore the free open-source version on GitHub.
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             <Link href="/signup">
-              <Button variant="primary" size="lg" className="text-lg px-10 py-5 animate-pulse-glow">
+              <Button variant="primary" size="lg" className="text-lg px-10 py-5">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -59,40 +92,45 @@ export default function HeroSection() {
                 Free GitHub Option
               </Button>
             </a>
-          </div>
+          </motion.div>
 
           {/* Trust indicators */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-slate-500 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-slate-500"
+          >
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
               Secure Payment
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-electric-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
               Instant Access
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               Premium Desktop Experience
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
               </svg>
               Free GitHub Option
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-navy-900 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-obsidian-950 to-transparent" />
     </section>
   );
 }

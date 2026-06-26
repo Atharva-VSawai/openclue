@@ -1,26 +1,30 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref" | "children"> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  children?: ReactNode;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading, children, disabled, ...props }, ref) => {
     return (
-      <button
+      <motion.button
         ref={ref}
         disabled={disabled || isLoading}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         className={cn(
-          'relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed',
+          'relative inline-flex items-center justify-center font-semibold rounded-xl transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-obsidian-950 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group',
           {
-            'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white hover:from-indigo-500 hover:to-indigo-400 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] focus:ring-indigo-500':
+            'bg-gradient-to-r from-electric-500 to-violet-500 text-white shadow-glow-primary focus:ring-electric-500':
               variant === 'primary',
-            'border border-white/20 text-white hover:bg-white/10 hover:border-white/30 backdrop-blur-sm focus:ring-white/50':
+            'glass border-white/20 text-white hover:bg-white/10 hover:border-white/30 focus:ring-white/50':
               variant === 'secondary',
             'text-slate-300 hover:text-white hover:bg-white/5 focus:ring-white/30':
               variant === 'ghost',
@@ -36,9 +40,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
+        {variant === 'primary' && (
+          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer group-hover:animate-none" />
+        )}
         {isLoading && (
           <svg
-            className="animate-spin h-5 w-5"
+            className="animate-spin h-5 w-5 mr-2"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -51,8 +58,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             />
           </svg>
         )}
-        {children}
-      </button>
+        <span className="relative z-10 flex items-center gap-2">{children}</span>
+      </motion.button>
     );
   }
 );
